@@ -33,12 +33,12 @@ Stop the annoying fan speed oscillations and take control of your server's cooli
 
 **One-line install:**
 ```bash
-curl -sSL https://raw.githubusercontent.com/YOUR-USERNAME/supermicro-fan-control/main/install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/veighnsche/supermicro-fan-control/main/install.sh | sudo bash
 ```
 
 **Manual install:**
 ```bash
-git clone https://github.com/YOUR-USERNAME/supermicro-fan-control.git
+git clone https://github.com/veighnsche/supermicro-fan-control.git
 cd supermicro-fan-control
 sudo ./install.sh
 ```
