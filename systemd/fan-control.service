@@ -1,0 +1,40 @@
+[Unit]
+Description=Fan curve control for Supermicro X11SSH-F
+After=fan-init.service multi-user.target
+Requires=fan-init.service
+StartLimitInterval=120
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/tmp
+ExecStart=/bin/bash /usr/local/bin/fan-control.sh
+ExecStopPost=/bin/bash -c "/usr/bin/ipmitool raw 0x30 0x45 0x02 2>/dev/null || true"
+
+# Aggressive restart on any failure
+Restart=always
+RestartSec=5
+StartLimitAction=reboot-force
+
+# Resource limits
+MemoryMax=50M
+CPUQuota=10%
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=fan-control
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/log
+
+# Timeouts
+TimeoutStartSec=30
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target

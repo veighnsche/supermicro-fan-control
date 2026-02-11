@@ -1,0 +1,11 @@
+[Unit]
+Description=Fan Control Health Check
+After=fan-control.service
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/bin/bash /usr/local/bin/fan-healthcheck.sh
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=fan-healthcheck
